@@ -3,6 +3,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ModeToggle } from "@/components/mode_toggle";
+import AuthProvider  from "@/providers/auth";
+import UserProfile from "@/components/ui/user-profile";
+import Header from "@/components/ui/header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,16 +22,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {" "}
+        <AuthProvider>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <ModeToggle />
+           <Header />
           {children}
         </ThemeProvider>
+        </AuthProvider>
+
       </body>
     </html>
   );
